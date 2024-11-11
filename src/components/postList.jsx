@@ -30,7 +30,7 @@ export default async function PostList({ data }) {
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {processedPosts.map((post) => (
         <Link
-          href={`post/${post.id}`}
+          href={`/post/${post.id}`}
           key={post.id}
           className="block group"
         >
