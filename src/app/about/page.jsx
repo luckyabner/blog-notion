@@ -4,6 +4,9 @@ import { marked } from 'marked'
 import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
 
+// 每小时更新一次
+export const revalidate = 3600;
+
 export default async function AboutPage() {
   const aboutPageId = process.env.NOTION_ABOUTPAGE_ID
   const aboutPost = await fetchMdContent(aboutPageId)

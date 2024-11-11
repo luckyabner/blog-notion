@@ -2,6 +2,9 @@ import PostList from "@/components/postList";
 import { Button } from "@/components/ui/button";
 import fetchData from "@/lib/data";
 
+// 每小时更新一次
+export const revalidate = 3600;
+
 export default async function Home() {
   const data = await fetchData();
   return (

@@ -3,6 +3,9 @@ import { fetchPostsByCategory } from '@/lib/data';
 import React from 'react'
 import { FolderIcon } from 'lucide-react';
 
+// 每小时更新一次
+export const revalidate = 3600;
+
 export default async function CategoryPostsPage({ params }) {
   const { name: encodedName } = await params;
   const categoryName = decodeURIComponent(encodedName);
