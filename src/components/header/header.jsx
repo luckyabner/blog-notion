@@ -9,6 +9,7 @@ export default function Header() {
   const links = [
     { name: '首页', href: '/' },
     { name: '分类', href: '/category' },
+    { name: '项目', href: '/project' },
     { name: '关于', href: '/about' }
   ]
 

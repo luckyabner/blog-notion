@@ -1,4 +1,4 @@
-import { fetchMdContent, fetchPost } from '@/lib/data'
+import { fetchMdContent } from '@/lib/data'
 import React from 'react'
 import { marked } from 'marked'
 import createDOMPurify from 'dompurify'
@@ -17,11 +17,6 @@ export default async function AboutPage() {
 
   return (
     <main className="container mx-auto px-4 py-12">
-      {/* 页面标题 */}
-      <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold mb-4">关于</h1>
-        <div className="w-20 h-1 bg-blue-500 mx-auto"></div>
-      </div>
 
       {/* 内容区域 */}
       <div className="max-w-3xl mx-auto">
