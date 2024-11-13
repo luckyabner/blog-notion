@@ -1,5 +1,7 @@
 import { Twitter } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { Github } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 export default function Footer() {
@@ -14,14 +16,21 @@ export default function Footer() {
 
           {/* 社交媒体链接 */}
           <div className="flex items-center gap-4">
-            <a
+            <Link
               href="https://github.com/cdt3211"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
               <Github className="w-5 h-5" />
-            </a>
+            </Link>
+            <Link
+              href="mailto:tiankong089@gmail.com"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <Mail className="w-5 h-5" />
+            </Link>
             {/* <a
               href="https://twitter.com/AbnerTy1"
               target="_blank"
