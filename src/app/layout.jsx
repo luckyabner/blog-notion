@@ -13,6 +13,12 @@ export const metadata = {
     description: '分享编程技术和个人思考的博客',
     type: 'website',
   },
+  alternates: {
+    canonical: 'https://blog.abnerz6.top',
+    types: {
+      'application/rss+xml': [{ url: 'feed.xml', title: 'RSS订阅' }]
+    }
+  }
 };
 
 export default function RootLayout({ children }) {

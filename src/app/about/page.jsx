@@ -17,7 +17,6 @@ export default async function AboutPage() {
 
   return (
     <main className="container mx-auto px-4 py-12">
-
       {/* 内容区域 */}
       <div className="max-w-3xl mx-auto">
         <article className="prose prose-lg mx-auto 
