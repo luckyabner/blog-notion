@@ -4,6 +4,9 @@ import { JSDOM } from 'jsdom'
 import createDOMPurify from 'dompurify'
 import React from 'react'
 
+//缓存时间为一小时
+export const revalidate = 3600;
+
 export default async function ProjectPage() {
   const projectPageId = process.env.NOTION_PROJECT_ID
   const md = await fetchMdContent(projectPageId)
