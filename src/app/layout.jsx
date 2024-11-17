@@ -2,6 +2,8 @@ import Header from "@/components/header/header";
 import "./globals.css";
 import Footer from "@/components/footer";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { OpenPanelComponent } from "@openpanel/nextjs";
 
 export const metadata = {
   title: `Abner's blog`,
@@ -30,6 +32,11 @@ export default function RootLayout({ children }) {
         <main className="flex-1">
           {children}
         </main>
+        <OpenPanelComponent
+          clientId="780a8a43-9efb-4bf4-aa2b-645145330bf8"
+          trackScreenViews={true}
+        />
+        <SpeedInsights />
         <GoogleAnalytics gaId="G-4PE6HD180B" />
         <Footer />
       </body>
