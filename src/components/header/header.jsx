@@ -1,10 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
 import MobileMenu from './mobileMenu'
 
 export default function Header() {
-  // const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const links = [
     { name: '首页', href: '/' },

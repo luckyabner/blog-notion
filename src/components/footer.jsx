@@ -1,4 +1,3 @@
-import { Twitter } from 'lucide-react'
 import { Mail } from 'lucide-react'
 import { Github } from 'lucide-react'
 import Link from 'next/link'
@@ -11,7 +10,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           {/* 版权信息 */}
           <div className="text-gray-600 text-sm">
-            © {new Date().getFullYear()} My Blog. All rights reserved.
+            © 2024 Abner`s` Blog. All rights reserved.
           </div>
 
           {/* 社交媒体链接 */}
@@ -31,14 +30,6 @@ export default function Footer() {
             >
               <Mail className="w-5 h-5" />
             </Link>
-            {/* <a
-              href="https://twitter.com/AbnerTy1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              <Twitter className="w-5 h-5" />
-            </a> */}
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import Header from "@/components/header/header";
 import "./globals.css";
 import Footer from "@/components/footer";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata = {
   title: `Abner's blog`,
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
         <main className="flex-1">
           {children}
         </main>
+        <GoogleAnalytics gaId="G-4PE6HD180B" />
         <Footer />
       </body>
     </html>
