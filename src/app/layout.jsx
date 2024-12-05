@@ -1,7 +1,6 @@
 import Header from "@/components/header/header";
 import "./globals.css";
 import Footer from "@/components/footer";
-import { GoogleAnalytics } from '@next/third-parties/google'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { OpenPanelComponent } from "@openpanel/nextjs";
 
@@ -37,7 +36,6 @@ export default function RootLayout({ children }) {
           trackScreenViews={true}
         />
         <SpeedInsights />
-        <GoogleAnalytics gaId="G-4PE6HD180B" />
         <Footer />
       </body>
     </html>
