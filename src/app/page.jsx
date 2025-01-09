@@ -93,7 +93,7 @@ export default async function Home() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+      {/* <section className="py-16 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
         <div className="container mx-auto px-4 text-center">
           <h3 className="text-2xl md:text-3xl font-bold mb-4">
             保持联系
@@ -105,7 +105,7 @@ export default async function Home() {
             <a href="/rss">RSS订阅</a>
           </Button>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }
