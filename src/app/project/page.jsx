@@ -83,7 +83,7 @@ export default async function ProjectPage() {
                   
                   {github?.error && (
                     <p className="text-red-500 text-sm mt-2">
-                      Unable to load repository data
+                      调用次数过多，请稍后再试
                     </p>
                   )}
                 </div>

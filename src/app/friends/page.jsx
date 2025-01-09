@@ -137,7 +137,7 @@ export default async function FriendsPage() {
                   <div className="grid grid-cols-[80px,1fr] gap-2">
                     <span className="text-gray-500">avatar:</span>
                     <span className="text-blue-600 break-all">
-                      https://abnerblog-1317606226.cos.ap-nanjing.myqcloud.com/202406291900870.jpg
+                        https://abnerblog-1317606226.cos.ap-nanjing.myqcloud.com/202501092104977.jpg
                     </span>
                   </div>
                   <div className="grid grid-cols-[80px,1fr] gap-2">
