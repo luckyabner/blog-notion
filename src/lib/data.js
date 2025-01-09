@@ -1,7 +1,6 @@
 import { NotionToMarkdown } from "notion-to-md";
 import { dbId, notion } from "./notionServer";
 
-
 //获取post列表
 export default async function fetchPosts() {
   try {
@@ -26,12 +25,46 @@ export default async function fetchPosts() {
 export async function fetchPost(pageId) {
   try {
     const res = await notion.pages.retrieve({
-      page_id: pageId,
+      page_id: pageId
     });
     return res;
   } catch (error) {
     console.error(error);
     return {};
+  }
+}
+
+export async function fetchPostBySlug(slugOrId) {
+  try {
+    // First try to query by slug
+    const response = await notion.databases.query({
+      database_id: dbId,
+      filter: {
+        property: 'slug',
+        rich_text: {
+          equals: slugOrId
+        }
+      }
+    });
+    
+    // If found by slug, return the first result
+    if (response.results.length > 0) {
+      return response.results[0];
+    }
+
+    // If not found by slug, try to retrieve directly by ID
+    try {
+      const pageResponse = await notion.pages.retrieve({
+        page_id: slugOrId
+      });
+      return pageResponse;
+    } catch (error) {
+      console.error('Failed to fetch by ID:', error);
+      return null;
+    }
+  } catch (error) {
+    console.error('Failed to fetch by slug:', error);
+    return null;
   }
 }
 

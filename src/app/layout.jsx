@@ -3,6 +3,9 @@ import "./globals.css";
 import Footer from "@/components/footer";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { OpenPanelComponent } from "@openpanel/nextjs";
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: `Abner's blog`,
@@ -25,8 +28,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="zh-CN">
-      <body className="min-h-screen flex flex-col font-mono">
+    <html lang="zh-CN" className="scroll-smooth">
+      <body className={`${inter.className} min-h-screen flex flex-col antialiased bg-white text-gray-900 selection:bg-blue-600/10 selection:text-blue-600`}>
         <Header />
         <main className="flex-1">
           {children}

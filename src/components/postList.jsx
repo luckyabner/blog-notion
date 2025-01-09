@@ -10,6 +10,7 @@ export default async function PostList({ data }) {
       //获取文章状态
       return {
         id: item.id,
+        slug: item.properties?.slug?.rich_text[0]?.plain_text || item.id,
         title: item.properties?.title?.title[0]?.plain_text || '无标题',
         description: item.properties?.Description?.rich_text[0]?.plain_text || '',
         date: item.properties?.date?.date?.start || item.created_time,
@@ -30,7 +31,7 @@ export default async function PostList({ data }) {
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {processedPosts.map((post) => (
         <Link
-          href={`/post/${post.id}`}
+          href={`/post/${post.slug}`}
           key={post.id}
           className="block group"
         >

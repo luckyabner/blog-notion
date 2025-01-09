@@ -1,4 +1,4 @@
-import fetchPosts from "@/lib/data";
+import fetchPosts, { fetchMdContent } from "@/lib/data";
 import RSS from "rss";
 
 export async function GET() {
@@ -19,19 +19,30 @@ export async function GET() {
     return dateB - dateA; // 按日期降序排序
   });
 
-  data.forEach((post) => {
+  // 使用Promise.all并行获取所有文章的内容
+  await Promise.all(data.map(async (post) => {
+    const mdContent = await fetchMdContent(post.id);
+    const slug = post.properties?.slug?.rich_text[0]?.plain_text || post.id;
+    const description = post.properties?.Description?.rich_text[0]?.plain_text || '';
+    
     feed.item({
       title: post.properties?.title?.title[0]?.plain_text,
+      description: description,
       guid: post.id,
-      url: `https://blog.abnerz6.top/post/${post.id}`,
+      url: `https://blog.abnerz6.top/post/${slug}`,
       date: post.properties?.date?.date?.start || post.created_time,
+      categories: [post.properties?.category?.select?.name || '未分类'],
+      author: 'Abner',
+      custom_elements: [
+        { 'content:encoded': mdContent }
+      ]
     })
-  })
+  }));
 
   return new Response(feed.xml(), {
     headers: {
-      "Content-Type": "application/xml"
+      "Content-Type": "application/xml",
+      "Cache-Control": "public, max-age=3600" // 缓存一小时
     }
   })
 }
-
