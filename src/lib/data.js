@@ -1,5 +1,6 @@
 import { NotionToMarkdown } from "notion-to-md";
-import { dbId, friendsDbId, notion } from "./notionServer";
+import { dbId, friendsDbId, notion, projectDbId } from "./notionServer";
+import axios from 'axios';
 
 //获取post列表
 export default async function fetchPosts() {
@@ -147,5 +148,53 @@ export async function fetchFriends() {
   }catch(err){
     console.log(err);
     return [];
+  }
+}
+
+//获取项目名称
+export async function fetchProject() {
+  try{
+    const res = await notion.databases.query({
+      database_id: projectDbId,
+    });
+    return res.results;
+  }catch(err){
+    console.log(err);
+    return [];
+  }
+}
+
+export async function fetchRepofromGithub(name) {
+  const url = `https://api.github.com/repos/${name}`;
+  
+  try {
+    const { data } = await axios.get(url, {
+      headers: {
+        'Accept': 'application/json',
+      }
+    });
+
+    return {
+      name: data.name,
+      description: data.description || '',
+      stars: data.stargazers_count || 0,
+      forks: data.forks_count || 0,
+      url: data.html_url,
+      language: data.language || 'Unknown',
+      topics: data.topics || [],
+      updatedAt: data.updated_at,
+    };
+  } catch (error) {
+    console.error('Detailed fetch error:', {
+      error: error.message,
+      response: error.response?.data,
+      name: name
+    });
+    
+    return {
+      error: true,
+      message: `Failed to fetch repository data: ${error.message}`,
+      name,
+    };
   }
 }
