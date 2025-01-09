@@ -1,6 +1,7 @@
 import { fetchFriends } from '@/lib/data'
 import Image from 'next/image'
 import { Users } from 'lucide-react'
+import { Code } from 'lucide-react'
 
 export const metadata = {
   title: '友情链接 | Abner\'s Blog',
@@ -67,28 +68,88 @@ export default async function FriendsPage() {
           ))}
         </div>
 
-        {/* Add Friend Section */}
-        <div className="mt-16 text-center">
-          <div className="inline-block p-6 rounded-lg bg-white shadow-sm border border-gray-100">
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">添加友链</h3>
-            <p className="text-gray-600 mb-4">
-              如果您想要添加友链，请确保您的网站：
-            </p>
-            <ul className="text-left text-gray-600 space-y-2 mb-4">
-              <li>• 网站内容积极向上，符合法律法规</li>
-              <li>• 站点稳定，加载速度正常</li>
-              <li>• 网站有实质性的原创内容</li>
-            </ul>
-            <p className="text-gray-600">
-              满足以上条件，欢迎通过
-              <a 
-                href="mailto:tiankong089@gmail.com" 
-                className="text-blue-600 hover:text-blue-700 font-medium mx-1"
-              >
-                邮件
-              </a>
-              联系我添加友链
-            </p>
+        {/* 添加友链和我的网站信息 */}
+        <div className="mt-16 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* 添加友链 */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <Users className="h-6 w-6 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">添加友链</h3>
+            </div>
+            
+            <div className="space-y-4">
+              <p className="text-gray-600">
+                如果您想要添加友链，请确保您的网站：
+              </p>
+              <ul className="space-y-2 text-gray-600">
+                <li className="flex items-center gap-2">
+                  <div className="h-1.5 w-1.5 rounded-full bg-blue-500"></div>
+                  网站内容积极向上，符合法律法规
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="h-1.5 w-1.5 rounded-full bg-blue-500"></div>
+                  站点稳定，加载速度正常
+                </li>
+                <li className="flex items-center gap-2">
+                  <div className="h-1.5 w-1.5 rounded-full bg-blue-500"></div>
+                  网站有实质性的原创内容
+                </li>
+              </ul>
+              <div className="pt-4">
+                <a 
+                  href="mailto:tiankong089@gmail.com" 
+                  className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+                >
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  发送邮件申请
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* 我的网站信息 */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-purple-100 rounded-lg">
+                <Code className="h-6 w-6 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">我的网站信息</h3>
+            </div>
+
+            <div className="space-y-4">
+              <div className="p-4 bg-gray-50 rounded-lg font-mono text-sm">
+                <div className="grid gap-3">
+                  <div className="grid grid-cols-[80px,1fr] gap-2">
+                    <span className="text-gray-500">name:</span>
+                    <span className="text-blue-600">Abner`s Blog</span>
+                  </div>
+                  <div className="grid grid-cols-[80px,1fr] gap-2">
+                    <span className="text-gray-500">link:</span>
+                    <a href="https://abner.top" target="_blank" rel="noopener noreferrer" 
+                      className="text-blue-600 hover:text-blue-700 truncate">
+                      https://blog.abnerz6.top
+                    </a>
+                  </div>
+                  <div className="grid grid-cols-[80px,1fr] gap-2">
+                    <span className="text-gray-500">avatar:</span>
+                    <span className="text-blue-600 break-all">
+                      https://abnerblog-1317606226.cos.ap-nanjing.myqcloud.com/202406291900870.jpg
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-[80px,1fr] gap-2">
+                    <span className="text-gray-500">desc:</span>
+                    <span className="text-blue-600">日拱一卒，功不唐捐</span>
+                  </div>
+                </div>
+              </div>
+              <div className="pt-2 text-sm text-gray-500">
+                复制以上信息进行友链配置
+              </div>
+            </div>
           </div>
         </div>
       </div>
