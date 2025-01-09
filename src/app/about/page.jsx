@@ -3,12 +3,12 @@ import React from 'react'
 import { marked } from 'marked'
 import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
+import { aboutPageId } from '@/lib/notionServer'
 
 // 每小时更新一次
 export const revalidate = 3600;
 
 export default async function AboutPage() {
-  const aboutPageId = process.env.NOTION_ABOUTPAGE_ID
   const aboutPost = await fetchMdContent(aboutPageId)
   const htmlContent = marked(aboutPost);
   const window = new JSDOM('').window;

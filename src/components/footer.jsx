@@ -39,7 +39,8 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-8">
           {/* Logo */}
           <Link 
-            href="/" 
+            href="https://github.com/cdt3211" 
+            target='blank'
             className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"
           >
             Abner

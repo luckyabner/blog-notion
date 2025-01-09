@@ -1,4 +1,4 @@
-import { fetchMdContent, fetchPost, fetchPostBySlug } from '@/lib/data'
+import { fetchMdContent, fetchPostBySlug } from '@/lib/data'
 import React from 'react'
 import PostDetail from '@/components/postDetail'
 
@@ -9,11 +9,11 @@ export const revalidate = 86400;
 export async function generateMetadata({ params }) {
   const { slug } = params;
   const properties = await fetchPostBySlug(slug);
-  
+
   const title = properties.properties?.title?.title[0]?.plain_text || '无标题';
   const description = properties.properties?.Description?.rich_text[0]?.plain_text || '';
   const category = properties.properties?.category?.select?.name || '';
-  
+
   return {
     title: `${title} | Abner's Blog`,
     description,

@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import MobileMenu from './mobileMenu'
-import { Home, Layers, Code, User } from 'lucide-react'
+import { Home, Layers, Code,Users, User } from 'lucide-react'
 
 export default function Header() {
 
@@ -11,6 +11,7 @@ export default function Header() {
     { name: '首页', href: '/', iconName: 'home' },
     { name: '分类', href: '/category', iconName: 'layers' },
     { name: '项目', href: '/project', iconName: 'code' },
+    { name: '友链', href: '/friends', iconName: 'users' },
     { name: '关于', href: '/about', iconName: 'user' }
   ]
 
@@ -19,6 +20,7 @@ export default function Header() {
       home: Home,
       layers: Layers,
       code: Code,
+      users: Users,
       user: User
     }
     const Icon = icons[iconName]

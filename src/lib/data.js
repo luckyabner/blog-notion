@@ -1,5 +1,5 @@
 import { NotionToMarkdown } from "notion-to-md";
-import { dbId, notion } from "./notionServer";
+import { dbId, friendsDbId, notion } from "./notionServer";
 
 //获取post列表
 export default async function fetchPosts() {
@@ -22,18 +22,6 @@ export default async function fetchPosts() {
 }
 
 //获取单个post的内容
-export async function fetchPost(pageId) {
-  try {
-    const res = await notion.pages.retrieve({
-      page_id: pageId
-    });
-    return res;
-  } catch (error) {
-    console.error(error);
-    return {};
-  }
-}
-
 export async function fetchPostBySlug(slugOrId) {
   try {
     // First try to query by slug
@@ -46,7 +34,7 @@ export async function fetchPostBySlug(slugOrId) {
         }
       }
     });
-    
+
     // If found by slug, return the first result
     if (response.results.length > 0) {
       return response.results[0];
@@ -67,6 +55,20 @@ export async function fetchPostBySlug(slugOrId) {
     return null;
   }
 }
+
+//获取页面内容
+export async function fetchPage(pageId){
+  try {
+    const response = await notion.pages.retrieve({
+      page_id: pageId
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
 
 //获取post的内容并解析为markdown格式
 export async function fetchMdContent(pageId) {
@@ -131,6 +133,19 @@ export async function fetchPostsByCategory(category) {
     return response.results;
   } catch (error) {
     console.error(error);
+    return [];
+  }
+}
+
+//获取友链
+export async function fetchFriends() {
+  try{
+    const res = await notion.databases.query({
+      database_id: friendsDbId,
+    });
+    return res.results;
+  }catch(err){
+    console.log(err);
     return [];
   }
 }
