@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import MobileMenu from './mobileMenu'
-import { Home, Layers, Code,Users, User } from 'lucide-react'
+import { Home, Layers, Code, Users, User, Fan } from 'lucide-react'
 
 export default function Header() {
 
@@ -11,6 +11,7 @@ export default function Header() {
     { name: '首页', href: '/', iconName: 'home' },
     { name: '分类', href: '/category', iconName: 'layers' },
     { name: '项目', href: '/project', iconName: 'code' },
+    { name: '动态', href: '/movies', iconName: 'fan' },
     { name: '友链', href: '/friends', iconName: 'users' },
     { name: '关于', href: '/about', iconName: 'user' }
   ]
@@ -21,7 +22,8 @@ export default function Header() {
       layers: Layers,
       code: Code,
       users: Users,
-      user: User
+      user: User,
+      fan: Fan
     }
     const Icon = icons[iconName]
     return Icon ? <Icon className="w-4 h-4" /> : null
@@ -32,8 +34,8 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="flex items-center gap-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"
           >
             <span className="text-2xl">Abner</span>

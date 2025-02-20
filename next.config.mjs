@@ -15,7 +15,18 @@ const nextConfig = {
         destination: '/rss.xml',
       }
     ];
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.doubanio.com',
+        port: '',
+        pathname: '/**',
+        search: '',
+      }
+    ],
+  },
 };
 
 export default nextConfig;
