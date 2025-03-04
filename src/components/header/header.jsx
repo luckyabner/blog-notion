@@ -3,58 +3,45 @@
 import React from 'react'
 import Link from 'next/link'
 import MobileMenu from './mobileMenu'
-import { Home, Layers, Code, Users, User, Fan } from 'lucide-react'
 
 export default function Header() {
 
   const links = [
-    { name: '首页', href: '/', iconName: 'home' },
-    { name: '分类', href: '/category', iconName: 'layers' },
-    { name: '项目', href: '/project', iconName: 'code' },
-    { name: '动态', href: '/movies', iconName: 'fan' },
-    { name: '友链', href: '/friends', iconName: 'users' },
-    { name: '关于', href: '/about', iconName: 'user' }
+    { name: 'Posts', href: '/posts', iconName: 'home' },
+    { name: 'Categories', href: '/category', iconName: 'layers' },
+    // { name: '项目', href: '/project', iconName: 'code' },
+    // { name: 'threads', href: '/movies', iconName: 'fan' },
+    { name: 'Friends', href: '/friends', iconName: 'users' },
+    { name: 'About', href: '/about', iconName: 'user' }
   ]
 
-  const getIcon = (iconName) => {
-    const icons = {
-      home: Home,
-      layers: Layers,
-      code: Code,
-      users: Users,
-      user: User,
-      fan: Fan
-    }
-    const Icon = icons[iconName]
-    return Icon ? <Icon className="w-4 h-4" /> : null
-  }
-
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-lg bg-white/80 border-b border-gray-200">
+    <header className="w-full mx-auto border-b border-gray-200 mb-6">
       <div className="container mx-auto px-4">
-        <nav className="flex items-center justify-between h-16">
+        <nav className="flex items-center justify-between h-28">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"
+            className="flex items-center font-bold"
           >
-            <span className="text-2xl">Abner</span>
+            <span className="text-3xl">Abner</span>
           </Link>
 
           {/* 桌面端导航 */}
-          <ul className="hidden md:flex items-center gap-8">
-            {links.map((link) => (
-              <li key={link.name}>
-                <Link
-                  href={link.href}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all"
-                >
-                  {getIcon(link.iconName)}
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <nav aria-label="主导航">
+            <ul className="hidden md:flex items-center">
+              {links.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="flex items-center gap-1.5 px-3 py-2  hover:text-sky-700 font-medium text-lg"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           <MobileMenu links={links} />
         </nav>

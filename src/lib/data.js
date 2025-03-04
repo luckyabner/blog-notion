@@ -2,20 +2,93 @@ import { NotionToMarkdown } from "notion-to-md";
 import { dbId, friendsDbId, notion, projectDbId } from "./notionServer";
 import axios from 'axios';
 
-//获取post列表
-export default async function fetchPosts() {
+//获取有分页的post列表
+export default async function fetchPosts({ pageSize = 5, startCursor } = {}) {
   try {
     const res = await notion.databases.query({
       database_id: dbId,
-      //过滤掉未发布的文章
       filter: {
         property: 'status',
         status: {
           equals: 'published'
         }
-      }
+      },
+      sorts: [
+        {
+          property: 'date',
+          direction: 'descending'
+        }
+      ],
+      page_size: pageSize,
+      start_cursor: startCursor
     });
-    return res.results;
+    // 处理数据
+    const processedPosts = res.results.map(item => {
+      try {
+        return {
+          id: item.id,
+          slug: item.properties?.slug?.rich_text[0]?.plain_text || item.id,
+          title: item.properties?.title?.title[0]?.plain_text || '无标题',
+          description: item.properties?.description?.rich_text[0]?.plain_text || '',
+          date: item.properties?.date?.date?.start || item.created_time,
+          category: item.properties?.category?.select?.name || '',
+        };
+      } catch (error) {
+        console.error('数据处理错误:', error);
+        return null;
+      }
+    })
+      .filter(Boolean)
+
+
+    return {
+      posts: processedPosts,
+      hasMore: res.has_more,
+      nextCursor: res.next_cursor,
+    };
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
+//获取所有post列表
+export async function fetchAllPosts() {
+  try {
+    const res = await notion.databases.query({
+      database_id: dbId,
+      filter: {
+        property: 'status',
+        status: {
+          equals: 'published'
+        }
+      },
+      sorts: [
+        {
+          property: 'date',
+          direction: 'descending'
+        }
+      ],
+    });
+    // 处理数据
+    const processedPosts = res.results.map(item => {
+      try {
+        return {
+          id: item.id,
+          slug: item.properties?.slug?.rich_text[0]?.plain_text || item.id,
+          title: item.properties?.title?.title[0]?.plain_text || '无标题',
+          description: item.properties?.description?.rich_text[0]?.plain_text || '',
+          date: item.properties?.date?.date?.start || item.created_time,
+          category: item.properties?.category?.select?.name || '',
+        };
+      } catch (error) {
+        console.error('数据处理错误:', error);
+        return null;
+      }
+    })
+      .filter(Boolean)
+
+    return processedPosts;
   } catch (error) {
     console.error(error);
     return [];
@@ -38,15 +111,32 @@ export async function fetchPostBySlug(slugOrId) {
 
     // If found by slug, return the first result
     if (response.results.length > 0) {
-      return response.results[0];
+      const post = response.results[0];
+      const processedPost = {
+        id: post.id,
+        title: post.properties?.title?.title[0]?.plain_text || '无标题',
+        description: post.properties?.description?.rich_text[0]?.plain_text || '',
+        category: post.properties?.category?.select?.name || '',
+        description: post?.properties?.description?.rich_text[0]?.plain_text,
+        date: post.properties?.date?.date?.start || post.created_time,
+      }
+      return processedPost;
     }
 
     // If not found by slug, try to retrieve directly by ID
     try {
-      const pageResponse = await notion.pages.retrieve({
+      const post = await notion.pages.retrieve({
         page_id: slugOrId
       });
-      return pageResponse;
+      const processedPost = {
+        id: post.id,
+        title: post.properties?.title?.title[0]?.plain_text || '无标题',
+        description: post.properties?.description?.rich_text[0]?.plain_text || '',
+        category: post.properties?.category?.select?.name || '',
+        description: post?.properties?.description?.rich_text[0]?.plain_text,
+        date: post.properties?.date?.date?.start || post.created_time,
+      }
+      return processedPost;
     } catch (error) {
       console.error('Failed to fetch by ID:', error);
       return null;
@@ -58,7 +148,7 @@ export async function fetchPostBySlug(slugOrId) {
 }
 
 //获取页面内容
-export async function fetchPage(pageId){
+export async function fetchPage(pageId) {
   try {
     const response = await notion.pages.retrieve({
       page_id: pageId
@@ -140,12 +230,12 @@ export async function fetchPostsByCategory(category) {
 
 //获取友链
 export async function fetchFriends() {
-  try{
+  try {
     const res = await notion.databases.query({
       database_id: friendsDbId,
     });
     return res.results;
-  }catch(err){
+  } catch (err) {
     console.log(err);
     return [];
   }
@@ -153,12 +243,12 @@ export async function fetchFriends() {
 
 //获取项目名称
 export async function fetchProject() {
-  try{
+  try {
     const res = await notion.databases.query({
       database_id: projectDbId,
     });
     return res.results;
-  }catch(err){
+  } catch (err) {
     console.log(err);
     return [];
   }
@@ -166,7 +256,7 @@ export async function fetchProject() {
 
 export async function fetchRepofromGithub(name) {
   const url = `https://api.github.com/repos/${name}`;
-  
+
   try {
     const { data } = await axios.get(url, {
       headers: {
@@ -190,7 +280,7 @@ export async function fetchRepofromGithub(name) {
       response: error.response?.data,
       name: name
     });
-    
+
     return {
       error: true,
       message: `Failed to fetch repository data: ${error.message}`,

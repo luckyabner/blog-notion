@@ -14,7 +14,7 @@ export default async function FriendsPage() {
   const friends = await fetchFriends()
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <main className="min-h-screen">
       {/* Hero Section */}
       <div className="py-16 text-center">
         <Users className="mx-auto h-16 w-16 text-blue-500 mb-4" />
@@ -49,7 +49,7 @@ export default async function FriendsPage() {
                       className="object-cover transform group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  
+
                   {/* Info */}
                   <div className="flex-1 min-w-0">
                     <h2 className="text-lg font-semibold text-gray-900 truncate group-hover:text-blue-600 transition-colors">
@@ -78,7 +78,7 @@ export default async function FriendsPage() {
               </div>
               <h3 className="text-xl font-semibold text-gray-900">添加友链</h3>
             </div>
-            
+
             <div className="space-y-4">
               <p className="text-gray-600">
                 如果您想要添加友链，请确保您的网站：
@@ -98,8 +98,8 @@ export default async function FriendsPage() {
                 </li>
               </ul>
               <div className="pt-4">
-                <a 
-                  href="mailto:tiankong089@gmail.com" 
+                <a
+                  href="mailto:tiankong089@gmail.com"
                   className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
                 >
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -129,7 +129,7 @@ export default async function FriendsPage() {
                   </div>
                   <div className="grid grid-cols-[80px,1fr] gap-2">
                     <span className="text-gray-500">link:</span>
-                    <a href="https://abner.top" target="_blank" rel="noopener noreferrer" 
+                    <a href="https://abner.top" target="_blank" rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-700 truncate">
                       https://blog.abnerz6.top
                     </a>
@@ -137,7 +137,7 @@ export default async function FriendsPage() {
                   <div className="grid grid-cols-[80px,1fr] gap-2">
                     <span className="text-gray-500">avatar:</span>
                     <span className="text-blue-600 break-all">
-                        https://abnerblog-1317606226.cos.ap-nanjing.myqcloud.com/202501092104977.jpg
+                      https://abnerblog-1317606226.cos.ap-nanjing.myqcloud.com/202501092104977.jpg
                     </span>
                   </div>
                   <div className="grid grid-cols-[80px,1fr] gap-2">
