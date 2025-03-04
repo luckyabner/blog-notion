@@ -20,7 +20,7 @@ export default async function PostsPage({ searchParams }) {
         <p>All the articles I&apos;ve posted.</p>
       </section>
       <PostList
-        data={posts}
+        posts={posts}
         hasMore={hasMore}
         nextCursor={nextCursor}
       />

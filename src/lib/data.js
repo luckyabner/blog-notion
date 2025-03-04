@@ -1,9 +1,10 @@
 import { NotionToMarkdown } from "notion-to-md";
 import { dbId, friendsDbId, notion, projectDbId } from "./notionServer";
 import axios from 'axios';
+import { SITE } from "@/config";
 
 //获取有分页的post列表
-export default async function fetchPosts({ pageSize = 5, startCursor } = {}) {
+export default async function fetchPosts({ pageSize = SITE.postPerPage, startCursor } = {}) {
   try {
     const res = await notion.databases.query({
       database_id: dbId,

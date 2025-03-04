@@ -1,7 +1,7 @@
 import PostList from "@/components/postList";
 import SocialIcons from "@/components/socialIcons";
 import { SITE } from "@/config";
-import fetchPosts, { fetchAllPosts } from "@/lib/data";
+import fetchPosts from "@/lib/data";
 import Link from "next/link";
 
 // 每小时更新一次
@@ -28,7 +28,7 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const data = await fetchAllPosts();
+  const { posts } = await fetchPosts();
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -55,7 +55,7 @@ export default async function Home() {
               Recent Posts
             </h2>
           </div>
-          <PostList data={data.slice(0, 5)} />
+          <PostList posts={posts.slice(0, 5)} page={false} />
         </div>
       </section>
 
