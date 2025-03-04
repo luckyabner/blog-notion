@@ -1,11 +1,11 @@
 import fetchPosts from "@/lib/data";
 
 export default async function sitemap() {
-  const posts = await fetchPosts();
-  
+  const { posts } = await fetchPosts();
+
   const postEntries = posts.map((post) => ({
-    url: `https://blog.abnerz6.top/post/${post.properties?.slug?.rich_text[0]?.plain_text || post.id}`,
-    lastModified: post.last_edited_time,
+    url: `https://blog.abnerz6.top/post/${post.slug || post.id}`,
+    lastModified: post.date,
     changeFrequency: 'weekly',
     priority: 0.8,
   }));
