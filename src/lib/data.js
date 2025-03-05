@@ -3,6 +3,22 @@ import { dbId, friendsDbId, notion, projectDbId } from "./notionServer";
 import axios from 'axios';
 import { SITE } from "@/config";
 
+function processPostItem(item) {
+  try {
+    return {
+      id: item.id,
+      slug: item.properties?.slug?.rich_text[0]?.plain_text || item.id,
+      title: item.properties?.title?.title[0]?.plain_text || '无标题',
+      description: item.properties?.description?.rich_text[0]?.plain_text || '',
+      date: item.properties?.date?.date?.start || item.created_time,
+      category: item.properties?.category?.select?.name || '',
+    };
+  } catch (error) {
+    console.error('数据处理错误:', error);
+    return null;
+  }
+}
+
 //获取有分页的post列表
 export default async function fetchPosts({ pageSize = SITE.postPerPage, startCursor } = {}) {
   try {
@@ -24,21 +40,7 @@ export default async function fetchPosts({ pageSize = SITE.postPerPage, startCur
       start_cursor: startCursor
     });
     // 处理数据
-    const processedPosts = res.results.map(item => {
-      try {
-        return {
-          id: item.id,
-          slug: item.properties?.slug?.rich_text[0]?.plain_text || item.id,
-          title: item.properties?.title?.title[0]?.plain_text || '无标题',
-          description: item.properties?.description?.rich_text[0]?.plain_text || '',
-          date: item.properties?.date?.date?.start || item.created_time,
-          category: item.properties?.category?.select?.name || '',
-        };
-      } catch (error) {
-        console.error('数据处理错误:', error);
-        return null;
-      }
-    })
+    const processedPosts = res.results.map(processPostItem)
       .filter(Boolean)
 
 
@@ -72,21 +74,7 @@ export async function fetchAllPosts() {
       ],
     });
     // 处理数据
-    const processedPosts = res.results.map(item => {
-      try {
-        return {
-          id: item.id,
-          slug: item.properties?.slug?.rich_text[0]?.plain_text || item.id,
-          title: item.properties?.title?.title[0]?.plain_text || '无标题',
-          description: item.properties?.description?.rich_text[0]?.plain_text || '',
-          date: item.properties?.date?.date?.start || item.created_time,
-          category: item.properties?.category?.select?.name || '',
-        };
-      } catch (error) {
-        console.error('数据处理错误:', error);
-        return null;
-      }
-    })
+    const processedPosts = res.results.map(processPostItem)
       .filter(Boolean)
 
     return processedPosts;
@@ -113,14 +101,7 @@ export async function fetchPostBySlug(slugOrId) {
     // If found by slug, return the first result
     if (response.results.length > 0) {
       const post = response.results[0];
-      const processedPost = {
-        id: post.id,
-        title: post.properties?.title?.title[0]?.plain_text || '无标题',
-        description: post.properties?.description?.rich_text[0]?.plain_text || '',
-        category: post.properties?.category?.select?.name || '',
-        description: post?.properties?.description?.rich_text[0]?.plain_text,
-        date: post.properties?.date?.date?.start || post.created_time,
-      }
+      const processedPost = processPostItem(post);
       return processedPost;
     }
 
@@ -129,14 +110,7 @@ export async function fetchPostBySlug(slugOrId) {
       const post = await notion.pages.retrieve({
         page_id: slugOrId
       });
-      const processedPost = {
-        id: post.id,
-        title: post.properties?.title?.title[0]?.plain_text || '无标题',
-        description: post.properties?.description?.rich_text[0]?.plain_text || '',
-        category: post.properties?.category?.select?.name || '',
-        description: post?.properties?.description?.rich_text[0]?.plain_text,
-        date: post.properties?.date?.date?.start || post.created_time,
-      }
+      const processedPost = processPostItem(post);
       return processedPost;
     } catch (error) {
       console.error('Failed to fetch by ID:', error);
@@ -222,21 +196,7 @@ export async function fetchPostsByCategory(category) {
       }
     });
 
-    const processedPosts = res.results.map(item => {
-      try {
-        return {
-          id: item.id,
-          slug: item.properties?.slug?.rich_text[0]?.plain_text || item.id,
-          title: item.properties?.title?.title[0]?.plain_text || '无标题',
-          description: item.properties?.description?.rich_text[0]?.plain_text || '',
-          date: item.properties?.date?.date?.start || item.created_time,
-          category: item.properties?.category?.select?.name || '',
-        };
-      } catch (error) {
-        console.error('数据处理错误:', error);
-        return null;
-      }
-    })
+    const processedPosts = res.results.map(processPostItem)
       .filter(Boolean)
 
     return processedPosts;

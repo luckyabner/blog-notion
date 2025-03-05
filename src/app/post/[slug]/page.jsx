@@ -3,6 +3,8 @@ import React from 'react'
 import PostDetail from '@/components/postDetail'
 import Link from 'next/link';
 import { GoBackButton } from '@/components/goBackButton';
+import { Suspense } from 'react';
+import ListSkeleton from '@/components/listSkeleton';
 
 // 缓存时间为一天
 export const revalidate = 86400;
@@ -32,16 +34,24 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function PostPage({ params }) {
+async function PostDetailContainer({ params }) {
   const { slug } = await params;
 
   const post = await fetchPostBySlug(slug);
   const mdContent = await fetchMdContent(post.id);
+  return (
+    <PostDetail post={post} mdContent={mdContent} />
+  )
+}
+
+export default function PostPage({ params }) {
 
   return (
     <main className='px-6'>
       <GoBackButton />
-      <PostDetail post={post} mdContent={mdContent} />
+      <Suspense fallback={<ListSkeleton />}>
+        <PostDetailContainer params={params} />
+      </Suspense>
     </main>
   )
 }
