@@ -3,6 +3,8 @@ import SocialIcons from "@/components/socialIcons";
 import { SITE } from "@/config";
 import fetchPosts from "@/lib/data";
 import Link from "next/link";
+import { Suspense } from "react";
+import ListSkeleton from "@/components/listSkeleton";
 
 // 每小时更新一次
 export const revalidate = 3600;
@@ -27,8 +29,11 @@ export const metadata = {
   }
 };
 
-export default async function Home() {
+async function PostListContainer() {
   const { posts } = await fetchPosts();
+  return <PostList posts={posts.slice(0, 5)} page={false} />
+}
+export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -55,7 +60,9 @@ export default async function Home() {
               Recent Posts
             </h2>
           </div>
-          <PostList posts={posts.slice(0, 5)} page={false} />
+          <Suspense fallback={<ListSkeleton />}>
+            <PostListContainer />
+          </Suspense>
         </div>
       </section>
 

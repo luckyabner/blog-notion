@@ -1,29 +1,35 @@
+import PageHeader from '@/components/pageHeader';
 import PostList from '@/components/postList'
 import fetchPosts from '@/lib/data';
-import { ChevronsRight } from 'lucide-react'
-import Link from 'next/link'
 import React from 'react'
+import { Suspense } from 'react';
+import ListSkeleton from '@/components/listSkeleton';
 
-export default async function PostsPage({ searchParams }) {
+async function PostListContainer({ searchParams }) {
+  const resolvedSearchParams = await searchParams;
   const { posts, hasMore, nextCursor } = await fetchPosts({
-    startCursor: (await searchParams).start
+    startCursor: resolvedSearchParams?.start
   });
+
   return (
-    <main>
-      <section className='mb-4'>
-        <div className='flex items-center gap-1 text-gray-600 text-lg'>
-          <Link href='/' className='hover:text-gray-900'>Home</Link>
-          <ChevronsRight className='size-5' />
-          <span>Posts</span>
-        </div>
-        <h1 className='text-3xl font-bold'>Posts</h1>
-        <p>All the articles I&apos;ve posted.</p>
-      </section>
-      <PostList
-        posts={posts}
-        hasMore={hasMore}
-        nextCursor={nextCursor}
+    <PostList
+      posts={posts}
+      hasMore={hasMore}
+      nextCursor={nextCursor}
+    />
+  );
+}
+
+export default function PostsPage({ searchParams }) {
+  return (
+    <main className='px-4'>
+      <PageHeader
+        title='Posts'
+        description='All the articles I&apos;ve posted.'
       />
+      <Suspense fallback={<ListSkeleton />}>
+        <PostListContainer searchParams={searchParams} />
+      </Suspense>
     </main>
-  )
+  );
 }

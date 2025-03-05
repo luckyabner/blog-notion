@@ -14,7 +14,7 @@ export default async function FriendsPage() {
   const friends = await fetchFriends()
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen px-4">
       {/* Hero Section */}
       <div className="py-16 text-center">
         <Users className="mx-auto h-16 w-16 text-blue-500 mb-4" />

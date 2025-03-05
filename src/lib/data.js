@@ -202,7 +202,7 @@ export async function fetchCategories() {
 //获取指定分类文章
 export async function fetchPostsByCategory(category) {
   try {
-    const response = await notion.databases.query({
+    const res = await notion.databases.query({
       database_id: dbId,
       filter: {
         and: [
@@ -222,7 +222,24 @@ export async function fetchPostsByCategory(category) {
       }
     });
 
-    return response.results;
+    const processedPosts = res.results.map(item => {
+      try {
+        return {
+          id: item.id,
+          slug: item.properties?.slug?.rich_text[0]?.plain_text || item.id,
+          title: item.properties?.title?.title[0]?.plain_text || '无标题',
+          description: item.properties?.description?.rich_text[0]?.plain_text || '',
+          date: item.properties?.date?.date?.start || item.created_time,
+          category: item.properties?.category?.select?.name || '',
+        };
+      } catch (error) {
+        console.error('数据处理错误:', error);
+        return null;
+      }
+    })
+      .filter(Boolean)
+
+    return processedPosts;
   } catch (error) {
     console.error(error);
     return [];

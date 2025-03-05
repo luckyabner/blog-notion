@@ -25,7 +25,7 @@ export const SOCIALS = [
   },
   {
     name: 'Twitter',
-    href: 'https://twitter.com/abnerz6',
+    href: 'https://twitter.com/AbnerTy1',
     linkTitle: `${SITE.author} on Twitter`,
     active: true,
   },

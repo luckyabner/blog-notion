@@ -39,7 +39,7 @@ export default async function PostPage({ params }) {
   const mdContent = await fetchMdContent(post.id);
 
   return (
-    <main>
+    <main className='px-6'>
       <GoBackButton />
       <PostDetail post={post} mdContent={mdContent} />
     </main>
