@@ -51,8 +51,15 @@ export default function PostList({ posts, hasMore, nextCursor, page = true }) {
         <div className='mt-8 flex justify-center gap-24 my-8'>
           <Link
             href={'#'}
-            className='flex items-center'
-            onClick={(e) => router.back()}
+            className={`flex items-center ${!searchParams.get('start') && 'text-gray-500 cursor-default'}`}
+            aria-disabled={!searchParams.get('start')}
+            onClick={(e) => {
+              if (!searchParams.get('start')) {
+                e.preventDefault();
+                return;
+              }
+              router.back();
+            }}
           >
             <ArrowLeft />
             Prev
