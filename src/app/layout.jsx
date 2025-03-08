@@ -3,6 +3,7 @@ import "./globals.css";
 import Footer from "@/components/footer";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
+import Script from "next/script";
 
 export const metadata = {
   title: `Abner's blog`,
@@ -26,6 +27,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="zh-CN" className="scroll-smooth">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-W0RXYK0PWJ"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-W0RXYK0PWJ');
+          `}
+        </Script>
+      </head>
       <body className={`font-mono min-h-screen max-w-3xl mx-auto flex flex-col antialiased bg-stone-50 text-gray-900 `}>
         <Header />
         <main className="flex-1">
