@@ -1,5 +1,6 @@
 'use client'
 import { Sun } from 'lucide-react'
+import { Clapperboard } from 'lucide-react'
 import { Moon } from 'lucide-react'
 import { Github } from 'lucide-react'
 import Link from 'next/link'
@@ -35,14 +36,13 @@ export default function ToolsBar() {
         }
     }
     return (
-        <div className="flex items-center space-x-4">
-            {/* <Link
-                href={'https://github.com/cdt3211/album-next'}
-                target="blank"
+        <div className="flex items-center space-x-2">
+            <Link
+                href={'/movies'}
                 className="rounded-full p-2 transition-colors hover:text-sky-700"
             >
-                <Github />
-            </Link> */}
+                <Clapperboard />
+            </Link>
             <button
                 className="rounded-full p-2 transition-colors hover:text-sky-700"
                 onClick={toggleTheme}
