@@ -10,7 +10,7 @@ export default async function ProjectPage() {
 	const projects = await fetchProjects();
 
 	return (
-		<main className='className="min-h-screen px-4"'>
+		<main className="min-h-screen px-4">
 			<PageHeader
 				title={'Projects'}
 				description={'These are my projects and toys.'}
