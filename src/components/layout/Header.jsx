@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { X } from 'lucide-react'
 import { Menu } from 'lucide-react'
-import ToolsBar from './toolsBar'
+import ToolsBar from '../ToolsBar'
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)

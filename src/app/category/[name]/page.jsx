@@ -1,60 +1,39 @@
-import PostList from '@/components/postList';
-import { fetchPostsByCategory } from '@/lib/data';
-import React from 'react'
-import { FolderIcon } from 'lucide-react';
-import { Suspense } from 'react';
-import ListSkeleton from '@/components/listSkeleton';
-import PageHeader from '@/components/pageHeader';
+import PostList from '@/components/PostList';
+import React from 'react';
+import PageHeader from '@/components/PageHeader';
+import { fetchPostsByCategory } from '@/features/categories/server/categories';
+import { CACHE_TIME } from '@/config';
 
 // 每小时更新一次
-export const revalidate = 3600;
+export const revalidate = CACHE_TIME;
 
-async function PostListContainer({ params }) {
-  const { name: encodedName } = await params;
-  const categoryName = decodeURIComponent(encodedName);
-  const posts = await fetchPostsByCategory(categoryName);
-
-  return (
-    <>
-      {posts.length > 0 ? (
-        <PostList posts={posts} page={false} />
-      ) : (
-        <div className="text-center text-gray-500 py-12">
-          该分类下暂无文章
-        </div>
-      )}
-    </>
-  );
-}
 export default async function CategoryPostsPage({ params }) {
-  const { name: encodedName } = await params;
-  const categoryName = decodeURIComponent(encodedName);
-  const posts = await fetchPostsByCategory(categoryName);
+	const { name: encodedName } = await params;
+	const categoryName = decodeURIComponent(encodedName);
+	const posts = await fetchPostsByCategory(categoryName);
 
-  return (
-    <main className="container mx-auto px-4 ">
-      <PageHeader
-        title={categoryName}
-        breadcrumbs={[
-          {
-            label: 'Categories',
-            href: '/category'
-          },
-          {
-            label: categoryName
-          }
-        ]} />
+	return (
+		<main className="container mx-auto px-4 ">
+			<PageHeader
+				title={categoryName}
+				breadcrumbs={[
+					{
+						label: 'Categories',
+						href: '/category',
+					},
+					{
+						label: categoryName,
+					},
+				]}
+			/>
 
-      {/* 文章列表区域 */}
-      <div className="max-w-5xl mx-auto">
-        {posts.length > 0 ? (
-          <PostList posts={posts} page={false} />
-        ) : (
-          <div className="text-center text-gray-500 py-12">
-            该分类下暂无文章
-          </div>
-        )}
-      </div>
-    </main>
-  );
+			{/* 文章列表区域 */}
+			<div className="max-w-5xl mx-auto">
+				<PostList
+					posts={posts}
+					page={false}
+				/>
+			</div>
+		</main>
+	);
 }

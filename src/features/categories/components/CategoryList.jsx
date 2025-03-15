@@ -2,6 +2,9 @@ import Link from 'next/link'
 import React from 'react'
 
 export default function CategoryList({ categories }) {
+    if (categories.length === 0) {
+        return <div className="text-center text-gray-500 py-12">暂无分类</div>
+    }
     return (
         <div className="flex gap-4">
             {categories.map((category, index) => (
