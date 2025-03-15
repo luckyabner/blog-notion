@@ -2,6 +2,7 @@
 import { Sun } from 'lucide-react'
 import { Clapperboard } from 'lucide-react'
 import { Moon } from 'lucide-react'
+import { Flame } from 'lucide-react'
 import { Github } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
@@ -40,10 +41,19 @@ export default function ToolsBar() {
             <Link
                 href={'/movies'}
                 className="rounded-full p-2 transition-colors hover:text-sky-700"
+                title="Threads"
             >
                 <Clapperboard />
             </Link>
+            <Link
+                href={'/projects'}
+                className="rounded-full p-2 transition-colors hover:text-sky-700"
+                title="Projects"
+            >
+                <Flame />
+            </Link>
             <button
+                title="切换主题"
                 className="rounded-full p-2 transition-colors hover:text-sky-700"
                 onClick={toggleTheme}
                 aria-label={theme === 'light' ? '切换至深色模式' : '切换至浅色模式'}
