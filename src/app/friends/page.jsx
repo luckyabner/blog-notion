@@ -5,13 +5,12 @@ import { Suspense } from 'react';
 import ListSkeleton from '@/components/ListSkeleton';
 import FriendsList from '@/features/friends/components/FriendsList';
 import { fetchFriends } from '@/features/friends/server/friends';
-import { CACHE_TIME } from '@/config';
 
 export const metadata = {
 	title: "Friends | Abner's Blog",
 };
 
-export const revalidate = CACHE_TIME;
+export const revalidate = 86400;
 
 async function FriendsContainer() {
 	const friends = await fetchFriends();

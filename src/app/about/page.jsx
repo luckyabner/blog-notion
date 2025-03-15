@@ -3,11 +3,10 @@ import { aboutPageId } from '@/lib/notionServer';
 import PageHeader from '@/components/PageHeader';
 import { Suspense } from 'react';
 import ListSkeleton from '@/components/ListSkeleton';
-import { CACHE_TIME } from '@/config';
 import { fetchMdContent2Html } from '@/lib/data';
 
 // 每小时更新一次
-export const revalidate = CACHE_TIME;
+export const revalidate = 86400;
 
 async function AboutContainer() {
 	const aboutContent = await fetchMdContent2Html(aboutPageId);

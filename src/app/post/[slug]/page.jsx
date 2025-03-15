@@ -1,14 +1,13 @@
 import React from 'react';
 import PostDetail from '@/features/posts/components/PostDetail';
 import { Suspense } from 'react';
-import { CACHE_TIME } from '@/config';
 import { GoBackButton } from '@/components/GoBackButton';
 import ListSkeleton from '@/components/ListSkeleton';
 import { fetchPostBySlug } from '@/features/posts/server/posts';
 import { fetchMdContent2Html } from '@/lib/data';
 
 // 缓存时间为一天
-export const revalidate = CACHE_TIME;
+export const revalidate = 86400;
 
 // 生成动态元数据
 export async function generateMetadata({ params }) {

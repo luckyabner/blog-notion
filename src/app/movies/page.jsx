@@ -3,14 +3,13 @@ import MoviesRecord from '@/features/movies/components/MoviesRecord';
 import ListSkeleton from '@/components/ListSkeleton';
 import React from 'react';
 import { Suspense } from 'react';
-import { CACHE_TIME } from '@/config';
 
 export const metadata = {
 	title: "观影动态 | Abner's Blog",
 	description: 'Abner 最近观影动态，分享观影心得',
 };
 
-export const revalidate = CACHE_TIME;
+export const revalidate = 86400;
 
 async function MoviesContainer() {
 	const res = await fetchDoubanRecords();

@@ -4,20 +4,22 @@ import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { SITE } from '@/config';
 
 export const metadata = {
-	title: `Abner's blog`,
-	description: '分享编程技术和个人思考的博客',
+	metadataBase: new URL(SITE.website),
+	title: SITE.title,
+	description: SITE.desc,
 	keywords: ['博客', '技术', '编程', 'Web开发'],
-	authors: [{ name: 'Abner' }],
-	creator: 'Abner',
+	authors: SITE.author,
+	creator: SITE.author,
 	openGraph: {
-		title: 'Abner的个人博客',
-		description: '分享编程技术和个人思考的博客',
+		title: SITE.title,
+		description: SITE.desc,
 		type: 'website',
 	},
 	alternates: {
-		canonical: 'https://blog.abnerz6.top',
+		canonical: SITE.website,
 		types: {
 			'application/rss+xml': [{ url: 'feed.xml', title: 'RSS订阅' }],
 		},

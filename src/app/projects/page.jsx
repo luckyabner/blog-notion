@@ -2,10 +2,9 @@ import React from 'react';
 import { fetchProjects } from '@/features/projects/server/projects';
 import PageHeader from '@/components/PageHeader';
 import ProjectsList from '@/features/projects/components/ProjectsList';
-import { CACHE_TIME } from '@/config';
 
 //缓存时间
-export const revalidate = CACHE_TIME;
+export const revalidate = 86400;
 
 export default async function ProjectPage() {
 	const projects = await fetchProjects();

@@ -36,5 +36,3 @@ export const SOCIALS = [
 		active: true,
 	},
 ];
-
-export const CACHE_TIME = 60 * 60 * 24; // 24 hours

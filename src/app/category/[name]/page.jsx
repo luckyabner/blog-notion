@@ -1,11 +1,10 @@
-import PostList from '@/components/PostList';
 import React from 'react';
 import PageHeader from '@/components/PageHeader';
 import { fetchPostsByCategory } from '@/features/categories/server/categories';
-import { CACHE_TIME } from '@/config';
+import PostList from '@/features/posts/components/PostList';
 
 // 每小时更新一次
-export const revalidate = CACHE_TIME;
+export const revalidate = 86400;
 
 export default async function CategoryPostsPage({ params }) {
 	const { name: encodedName } = await params;

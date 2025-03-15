@@ -1,13 +1,12 @@
 import ListSkeleton from '@/components/ListSkeleton';
 import PageHeader from '@/components/PageHeader';
-import { CACHE_TIME } from '@/config';
 import CategoryList from '@/features/categories/components/CategoryList';
 import { fetchCategories } from '@/features/categories/server/categories';
 import React from 'react';
 import { Suspense } from 'react';
 
 // 每小时更新一次
-export const revalidate = CACHE_TIME;
+export const revalidate = 86400;
 
 async function CategoriesListContaier() {
 	const categories = await fetchCategories();

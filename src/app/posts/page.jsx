@@ -2,11 +2,10 @@ import PageHeader from '@/components/PageHeader';
 import React from 'react';
 import { Suspense } from 'react';
 import ListSkeleton from '@/components/ListSkeleton';
-import { CACHE_TIME } from '@/config';
 import fetchPosts from '@/features/posts/server/posts';
 import PostList from '@/features/posts/components/PostList';
 
-export const revalidate = CACHE_TIME;
+export const revalidate = 86400;
 async function PostListContainer({ searchParams }) {
 	const resolvedSearchParams = await searchParams;
 	const { posts, hasMore, nextCursor } = await fetchPosts({
