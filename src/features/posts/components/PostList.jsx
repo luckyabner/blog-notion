@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import React from 'react';
-import { CalendarIcon, FolderIcon } from 'lucide-react';
+import { CalendarIcon } from 'lucide-react';
 import dayjs from 'dayjs';
 import { ArrowLeft } from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
