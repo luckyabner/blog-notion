@@ -28,7 +28,7 @@ export default function MoviesRecord({ movies }) {
 								<div className="relative flex items-start space-x-4">
 									{/* 时间点 */}
 									<div className="relative">
-										<span className="bg-blue-500 h-14 w-14 rounded-full flex items-center justify-center text-white font-medium text-sm">
+										<span className="bg-blue-500 p-2 h-14 w-14 rounded-full flex items-center justify-center text-white font-medium text-sm">
 											{new Date(movie.pubDate[0]).toLocaleDateString('zh-CN', {
 												month: 'numeric',
 												day: 'numeric',
@@ -38,7 +38,7 @@ export default function MoviesRecord({ movies }) {
 
 									{/* 电影卡片 */}
 									<div className="min-w-0 flex-1 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
-										<div className="flex flex-col sm:flex-row">
+										<div className="flex flex-col p-6 sm:flex-row">
 											{/* 电影海报 */}
 											<a
 												href={movie.link[0]}
@@ -88,7 +88,7 @@ export default function MoviesRecord({ movies }) {
 
 												{/* 备注信息 */}
 												{remark !== '无' && (
-													<div className="mt-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 p-3 rounded-lg">
+													<div className="mt-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
 														📝 {remark}
 													</div>
 												)}
