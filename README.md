@@ -1,6 +1,6 @@
 # 基于NextJS和Notion的Blog网站
 ## 展示
-体验地址 [Abner's Blog](https://blog.abnerz6.top/)
+体验地址 [Abner's Blog](https://blog.luckyabner.top/)
 ### 前端
 ![alt text](image.png)
 ### 数据库端
