@@ -54,7 +54,7 @@ export default function PostList({ posts, hasMore, nextCursor, page = true }) {
               <CalendarIcon className="size-5" />{" "}
               {dayjs(post.date).format("YYYY-MM-DD")}
             </p>
-            <p>{post.description}. </p>
+            <p className="line-clamp-1">{post.description} </p>
           </div>
         ))}
       </div>
