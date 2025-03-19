@@ -7,7 +7,7 @@ export default function PostDetail({ post, content = "" }) {
   return (
     <div className="container mx-auto mt-2 max-w-4xl">
       <PostProperties post={post} />
-      <article className="prose mx-auto">
+      <article className="prose mx-auto dark:prose-invert">
         <Markdown>{content}</Markdown>
       </article>
     </div>

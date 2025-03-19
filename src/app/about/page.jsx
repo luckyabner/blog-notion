@@ -13,7 +13,7 @@ async function AboutContainer() {
   const aboutContent = await fetchMdContent(aboutPageId);
   return (
     <div className="mx-auto max-w-3xl">
-      <article className="prose mx-auto prose-headings:font-bold prose-p:leading-relaxed prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg prose-img:shadow-lg">
+      <article className="prose mx-auto dark:prose-invert prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg prose-img:shadow-lg">
         <Markdown>{aboutContent}</Markdown>
       </article>
     </div>
