@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="border-gary-200 relative mt-8 border-b p-6">
+      <section className="relative mt-8 border-b border-border p-6">
         <div className="text-6xl font-bold">Welcome👋🏻</div>
         <div className="mt-6 text-lg">
           This is my blog, where I share my thoughts and experiences in the
@@ -63,7 +63,7 @@ export default function Home() {
       </section>
       <Link
         href={"/posts"}
-        className="mb-4 flex justify-center text-lg hover:text-sky-700"
+        className="hover:text-hover mb-4 flex justify-center text-lg"
       >
         All Posts →
       </Link>

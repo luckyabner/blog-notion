@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body
-        className={`mx-auto flex min-h-screen max-w-3xl flex-col bg-gray-50 font-mono antialiased transition-colors dark:bg-gray-800 dark:text-white`}
+        className={`mx-auto flex min-h-screen max-w-3xl flex-col bg-background font-mono antialiased transition-colors`}
       >
         <Header />
         <main className="flex-1">{children}</main>

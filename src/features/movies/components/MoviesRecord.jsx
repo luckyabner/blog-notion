@@ -20,13 +20,13 @@ export default function MoviesRecord({ movies }) {
               <div className="relative pb-8">
                 {/* 时间线装饰 */}
                 {index !== movies.length - 1 && (
-                  <span className="absolute left-7 top-4 -ml-px h-full w-0.5 bg-gray-200 dark:bg-gray-700" />
+                  <span className="absolute left-7 top-4 -ml-px h-full w-0.5 bg-muted-foreground" />
                 )}
 
                 <div className="relative flex items-start space-x-4">
                   {/* 时间点 */}
                   <div className="relative">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-500 p-2 text-sm font-medium text-white">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent p-2 text-sm font-medium">
                       {new Date(movie.pubDate[0]).toLocaleDateString("zh-CN", {
                         month: "numeric",
                         day: "numeric",
@@ -35,7 +35,7 @@ export default function MoviesRecord({ movies }) {
                   </div>
 
                   {/* 电影卡片 */}
-                  <div className="min-w-0 flex-1 rounded-lg bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md dark:bg-gray-800">
+                  <div className="min-w-0 flex-1 rounded-lg border-border bg-card p-6 shadow-sm transition-shadow duration-200 hover:shadow-md">
                     <div className="flex flex-col space-x-4 p-4 sm:flex-row">
                       {/* 电影海报 */}
                       <Link
@@ -55,7 +55,7 @@ export default function MoviesRecord({ movies }) {
 
                       {/* 电影信息 */}
                       <div className="flex-1">
-                        <h2 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+                        <h2 className="mb-2 text-xl font-semibold">
                           {movie.title[0]}
                           <span className="ml-2 text-sm font-medium">
                             {movie.title[0].startsWith("想看") ? "⏳" : "✔️"}
@@ -91,7 +91,7 @@ export default function MoviesRecord({ movies }) {
                         )}
 
                         {/* 元信息 */}
-                        <div className="mt-4 space-y-1 text-sm text-gray-500 dark:text-gray-400">
+                        <div className="mt-4 space-y-1 text-sm text-muted-foreground">
                           <p className="flex items-center">
                             <span className="mr-2">⏰</span>
                             {new Date(movie.pubDate[0]).toLocaleString()}
