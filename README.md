@@ -25,6 +25,9 @@
 3. 在 /src/config.js 中配置页面信息
 4. 可以一键部署到vercel，也可以自行部署
 
+##  相关链接
+- 网站图标 - [LogoCook](https://www.logocook.shop/)
+
 ## 有任何不懂或想寻求帮助欢迎主页联系我
 
 ## LICENSE
