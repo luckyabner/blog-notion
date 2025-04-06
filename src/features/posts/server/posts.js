@@ -26,6 +26,7 @@ export default async function fetchPosts({
       page_size: pageSize,
       start_cursor: startCursor,
     });
+
     // 处理数据
     const processedPosts = res.results.map(processPostItem).filter(Boolean);
     return {

@@ -31,7 +31,13 @@ export const metadata = {
 
 async function PostListContainer() {
   const { posts } = await fetchPosts();
-  return <PostList posts={posts.slice(0, 5)} page={false} />;
+  return (
+    <PostList
+      initialPosts={posts.slice(0, 5)}
+      initialHasMore={false}
+      initialNextCursor={null}
+    />
+  );
 }
 export default function Home() {
   return (
@@ -63,7 +69,7 @@ export default function Home() {
       </section>
       <Link
         href={"/posts"}
-        className="hover:text-hover mb-4 flex justify-center text-lg"
+        className="mb-4 flex justify-center text-lg hover:text-hover"
       >
         All Posts →
       </Link>
